@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=4 uid="uid://cjyh2bfuwaq4g"]
+
+[ext_resource type="Texture2D" uid="uid://bar2q23k2s5v" path="res://Assets/pong.png" id="1_qguit"]
+[ext_resource type="Texture2D" uid="uid://bbfbs55od4icb" path="res://Assets/Ball.png" id="2_733f1"]
+[ext_resource type="Texture2D" uid="uid://dubcfjwm2a20w" path="res://Assets/arenadivider.png" id="3_ag4b5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_waqb4"]
+size = Vector2(6, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0oay"]
+size = Vector2(6, 32)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3j7wr"]
+radius = 6.26049
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xjidj"]
+resource_name = "divider"
+texture = ExtResource("3_ag4b5")
+texture_region_size = Vector2i(2, 13)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/1 = 1
+0:0/1/texture_origin = Vector2i(1, 2)
+
+[sub_resource type="TileSet" id="TileSet_w5x1t"]
+tile_size = Vector2i(32, 32)
+occlusion_layer_0/light_mask = 1
+sources/0 = SubResource("TileSetAtlasSource_xjidj")
+
+[node name="pong" type="Node2D"]
+
+[node name="wall_top" type="Node2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_top"]
+
+[node name="wall_bottom" type="Node2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall_bottom"]
+
+[node name="paddlebodyB" type="CharacterBody2D" parent="."]
+position = Vector2(770, 341)
+rotation = -6.28319
+
+[node name="paddle" type="Sprite2D" parent="paddlebodyB"]
+position = Vector2(16, 16)
+texture = ExtResource("1_qguit")
+
+[node name="paddlecollision" type="CollisionShape2D" parent="paddlebodyB"]
+position = Vector2(3, 16)
+shape = SubResource("RectangleShape2D_waqb4")
+
+[node name="paddlebodyA" type="CharacterBody2D" parent="."]
+position = Vector2(30, 341)
+
+[node name="paddle" type="Sprite2D" parent="paddlebodyA"]
+position = Vector2(16, 16)
+texture = ExtResource("1_qguit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paddlebodyA"]
+position = Vector2(3, 16)
+shape = SubResource("RectangleShape2D_j0oay")
+
+[node name="ball" type="CharacterBody2D" parent="."]
+position = Vector2(400.5, 341)
+
+[node name="Sprite2D" type="Sprite2D" parent="ball"]
+position = Vector2(-0.317627, 2.42677)
+texture = ExtResource("2_733f1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+position = Vector2(0.016449, -0.0232086)
+shape = SubResource("CircleShape2D_3j7wr")
+debug_color = Color(3.08037e-06, 0.536086, 0.626328, 0.42)
+
+[node name="P1Score" type="Label" parent="."]
+offset_left = 320.0
+offset_top = 40.0
+offset_right = 360.0
+offset_bottom = 63.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="P2Score" type="Label" parent="."]
+offset_left = 432.0
+offset_top = 40.0
+offset_right = 472.0
+offset_bottom = 63.0
+text = "0"
+horizontal_alignment = 1
+
+[node name="Arenaborder" type="TileMapLayer" parent="."]
+position = Vector2(416, 336)
+tile_map_data = PackedByteArray("AAD//wIAAAAAAAAAAQD//wEAAAAAAAAAAQD//wAAAAAAAAAAAQD/////AAAAAAAAAQD///7/AAAAAAAAAQD///3/AAAAAAAAAQD///z/AAAAAAAAAQD///v/AAAAAAAAAQD///r/AAAAAAAAAQD///n/AAAAAAAAAQD///j/AAAAAAAAAQD///f/AAAAAAAAAQD///b/AAAAAAAAAQD///X/AAAAAAAAAQD//wMAAAAAAAAAAQD//wQAAAAAAAAAAQD//wUAAAAAAAAAAQD//wYAAAAAAAAAAQD//wcAAAAAAAAAAQD//wgAAAAAAAAAAQD//wkAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_w5x1t")
+collision_enabled = false
+collision_visibility_mode = 2
